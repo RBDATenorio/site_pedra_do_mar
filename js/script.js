@@ -1,28 +1,36 @@
-const navSlide = () => {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('.nav-links');
-    const navLinks = document.querySelectorAll('.nav-links li');
 
-    burger.addEventListener('click', () =>{
-        // toggle Nav
-        nav.classList.toggle('nav-active');
-        console.log(document.querySelector('.nav-active'));
-        // Animate Links
-        navLinks.forEach((link, index) => {
-            if(link.style.animation){
-                link.style.animation = '';
-            }
-            else{
-                link.style.animation = `navLinkFade 0.5s forwards ${index / 7 + 0.3}s`;
-            }
-        });
+let headerSlider = () => {
+    window.addEventListener('load', () => {
+    let time = 3000;
+    let images = document.querySelectorAll('.slider div');
+    let imageIndex = 0;
 
-        burger.classList.toggle('toggle');
+    setInterval(() => {
+        images[imageIndex].classList.remove('selected');
+        imageIndex++;
+        if(imageIndex == images.length){
+            imageIndex = 0;
+        }
+        images[imageIndex].classList.add('selected');
+    }, time);
     });
 }
 
-const app = () => {
-    navSlide();
+let burgerMenu = () => {
+    let burger = document.querySelector('.burger');
+    let navlinks = document.querySelector('.nav-links');
+    let nav = document.querySelector('nav');
+
+    burger.addEventListener('click', () => {
+        navlinks.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+        nav.classList.toggle('nav-background');
+    });
 }
 
-app();
+let apps = () => {
+    burgerMenu();
+    headerSlider();    
+}
+
+apps();
