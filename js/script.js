@@ -1,7 +1,7 @@
 
 let headerSlider = () => {
     window.addEventListener('load', () => {
-    let time = 3000;
+    let time = 5000;
     let images = document.querySelectorAll('.slider div');
     let imageIndex = 0;
 
@@ -18,19 +18,44 @@ let headerSlider = () => {
 
 let burgerMenu = () => {
     let burger = document.querySelector('.burger');
-    let navlinks = document.querySelector('.nav-links');
+    let navLinks = document.querySelector('.nav-links');
     let nav = document.querySelector('nav');
 
     burger.addEventListener('click', () => {
-        navlinks.classList.toggle('nav-active');
+        navLinks.classList.toggle('nav-active');
         burger.classList.toggle('toggle');
         nav.classList.toggle('nav-background');
     });
+
+    // Close the dropdown if the user clicks outside of it
+    window.addEventListener('click', function(e){   
+
+        if (((!nav.contains(e.target)))){
+                navLinks.classList.remove('nav-active');
+                burger.classList.remove('toggle');
+                nav.classList.remove('nav-background');
+        } 
+      });
+
+}
+
+let dropDownMenu = () => {
+    let dropdown = document.querySelector('.dropdown');
+    let dropdown_content = document.querySelector('.dropdown-content');
+   
+    dropdown.onmouseover = () => {
+        dropdown_content.classList.add('dropdown-activte');
+        console.log(dropdown_content);
+    }
+    dropdown.onmouseleave = () => {
+        dropdown_content.classList.remove('dropdown-activte');
+    }
 }
 
 let apps = () => {
     burgerMenu();
-    headerSlider();    
+    headerSlider();
+    dropDownMenu();
 }
 
-apps();
+apps(); 
